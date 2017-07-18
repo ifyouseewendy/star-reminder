@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 gem "octokit", "~> 4.0"
 gem "actionmailer", require: "action_mailer"
+gem 'roadie-rails'
 gem "dotenv"
 
 group :development do
