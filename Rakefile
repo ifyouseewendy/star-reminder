@@ -30,8 +30,10 @@ task :run do
         description: star.description,
         stargazers_count: star.stargazers_count,
         watchers_count: star.watchers_count,
+        forks_count: star.forks_count,
         language: star.language,
-        homepage: star.homepage
+        homepage: star.homepage,
+        updated_at: star.updated_at
       }
     end
   else

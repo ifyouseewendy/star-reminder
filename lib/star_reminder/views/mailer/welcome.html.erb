@@ -7,9 +7,30 @@
   <% payload.each do |star| %>
     <li>
       <ul class="star">
-        <% star.each do |k, v| %>
-          <li><%= [k, v].join(": ") %></li>
-        <% end %>
+        <li class="star-item">
+          <h3>
+            <%= link_to star.values_at("owner", "name").join(" / "), star["html_url"] %>
+          </h3>
+        </li>
+        <li class="star-item">
+          <p class="star-desc">
+            <%= star["description"] %>
+          </p>
+        </li>
+        <li class="star-item">
+          <span class="star-tag">
+            <%= star["language"] %>
+          </span>
+          <span class="star-tag">
+            <%= star["stargazers_count"] %>
+          </span>
+          <span class="star-tag">
+            <%= star["forks_count"] %>
+          </span>
+          <span class="star-tag">
+            Updated <%= time_ago_in_words star["updated_at"] %>
+          </span>
+        </li>
       </ul>
     </li>
   <% end %>
