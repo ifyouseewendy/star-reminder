@@ -1,18 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "rubygems"
-require "bundler/setup"
-
-require "dotenv"
-Dotenv.load
-
-ENV["RACK_ENV"] ||= "development"
 $LOAD_PATH.unshift File.expand_path("./../../lib", __FILE__)
-
-require "octokit"
-require "action_mailer"
-require "letter_opener" unless "production" == ENV["RACK_ENV"]
 require "star_reminder"
 
 Octokit.auto_paginate = true
