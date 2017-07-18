@@ -23,7 +23,7 @@ module MailerConfig
     end
 
     def load_development
-      letter_file = File.expand_path("../../tmp/letter_opener", __FILE__)
+      letter_file = File.expand_path("../../../tmp/letter_opener", __FILE__)
       ActionMailer::Base.add_delivery_method :letter_opener, LetterOpener::DeliveryMethod, location: letter_file
       ActionMailer::Base.delivery_method = :letter_opener
     end
