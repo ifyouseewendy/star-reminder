@@ -8,4 +8,5 @@ gem "dotenv"
 group :development do
   gem "letter_opener"
   gem "pry-byebug"
+  gem "awesome_print"
 end
