@@ -1,1 +1,16 @@
-<h1>Hello world</h1>
+<% payload = @payload || {} %>
+
+<h1>Here is your starring digest</h1>
+<div class="main">
+  <ul class="stars">
+    <% payload.each do |star| %>
+      <li>
+        <ul class="star">
+          <% star.each do |k, v| %>
+            <li><%= [k, v].join(": ") %></li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>
