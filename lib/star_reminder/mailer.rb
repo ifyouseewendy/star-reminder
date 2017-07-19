@@ -5,6 +5,12 @@ class Mailer < ActionMailer::Base
   default from: "Di Wen <ifyouseewendy@gmail.com>", subject: "Github Star Reminder"
   layout "mailer"
 
+  helper do
+    def colors
+      @_colors ||= JSON.parse File.read("resource/colors.json")
+    end
+  end
+
   def welcome(to:, payload: {})
     @payload = payload
     mail(to: to)
