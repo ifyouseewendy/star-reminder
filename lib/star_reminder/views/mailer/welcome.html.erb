@@ -1,4 +1,4 @@
-<% payload = @payload || {} %>
+<% payload = @payload %>
 
 <p>Hi there,</p>
 <p>This is your Github Star Reminder. Meet your serendipity.</p>
@@ -18,13 +18,17 @@
         </div>
         <div class="star-item">
           <span class="star-tag">
-            <%= star["language"] %>
+            <% lang = star["language"] %>
+            <span class="star-language-color star-icon" style="background-color: <%= colors[lang]['color'] %>">
+            </span>
+            <%= lang %>
           </span>
           <span class="star-tag">
-            <%= octicon "alert", "aria-label": "hi" %>
+            <%= octicon "star", "aria-label": "star", fill: "#586069", class: "star-icon" %>
             <%= star["stargazers_count"] %>
           </span>
           <span class="star-tag">
+            <%= octicon "repo-forked", "aria-label": "repo-forked", fill: "#586069", class: "star-icon" %>
             <%= star["forks_count"] %>
           </span>
           <span class="star-tag">

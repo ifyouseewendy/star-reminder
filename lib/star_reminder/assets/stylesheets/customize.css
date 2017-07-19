@@ -20,4 +20,19 @@
 .star-tag {
   display: inline-block;
   margin-right: 2em;
+  color: #586069;
 }
+
+.star-icon {
+  position: relative;
+  top: 2px;
+  display: inline-block;
+}
+
+.star-language-color {
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 50%;
+  top: 1px;
+}
+
