@@ -3,21 +3,20 @@
 <p>Hi there,</p>
 <p>This is your Github Star Reminder. Meet your serendipity.</p>
 
-<ul class="stars">
+<div class="stars">
   <% payload.each do |star| %>
-    <li>
-      <ul class="star">
-        <li class="star-item">
+      <div class="star">
+        <div class="star-item">
           <h3>
             <%= link_to star.values_at("owner", "name").join(" / "), star["html_url"] %>
           </h3>
-        </li>
-        <li class="star-item">
+        </div>
+        <div class="star-item">
           <p class="star-desc">
             <%= star["description"] %>
           </p>
-        </li>
-        <li class="star-item">
+        </div>
+        <div class="star-item">
           <span class="star-tag">
             <%= star["language"] %>
           </span>
@@ -30,8 +29,8 @@
           <span class="star-tag">
             Updated <%= time_ago_in_words star["updated_at"] %>
           </span>
-        </li>
-      </ul>
-    </li>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

@@ -1,0 +1,23 @@
+.star {
+  border-bottom: 1px #e1e4e8 solid;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.star-item h3 {
+  font-size: 1.6em;
+  margin-bottom: 0.2em;
+}
+
+.star-item a {
+  text-decoration: none;
+}
+
+.star-desc {
+  color: #586069;
+}
+
+.star-tag {
+  display: inline-block;
+  margin-right: 2em;
+}
