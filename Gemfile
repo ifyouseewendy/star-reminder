@@ -5,6 +5,7 @@ gem "octokit", "~> 4.0"
 gem "actionmailer", require: "action_mailer"
 gem 'roadie-rails'
 gem "dotenv"
+gem "octicons_helper"
 
 group :development do
   gem "letter_opener"
