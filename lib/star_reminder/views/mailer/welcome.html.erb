@@ -2,35 +2,35 @@
 
 <div class="stars">
   <h1>Github Star Reminder</h1>
-  <% payload.each do |star| %>
-      <div class="star">
+  <% payload.each_with_index do |star, index| %>
+    <div class="star <%= index == payload.count - 1 ? 'star-last' : '' %>">
         <div class="star-item">
           <h3>
-            <%= link_to star.values_at("owner", "name").join(" / "), star["html_url"] %>
+            <%= link_to [star.owner, star.name].join(" / "), star.html_url %>
           </h3>
         </div>
         <div class="star-item">
           <p class="star-desc">
-            <%= star["description"] %>
+            <%= star.description %>
           </p>
         </div>
         <div class="star-item star-tags">
           <span class="star-tag">
-            <% lang = star["language"] %>
+            <% lang = star.language %>
             <span class="star-language-color star-icon" style="background-color: <%= colors[lang] %>">
             </span>
             <%= lang %>
           </span>
           <span class="star-tag">
             <%= octicon "star", "aria-label": "star", fill: "#586069", class: "star-icon" %>
-            <%= star["stargazers_count"] %>
+            <%= star.stargazers_count %>
           </span>
           <span class="star-tag">
             <%= octicon "repo-forked", "aria-label": "repo-forked", fill: "#586069", class: "star-icon" %>
-            <%= star["forks_count"] %>
+            <%= star.forks_count %>
           </span>
           <span class="star-tag">
-            Updated <%= time_ago_in_words star["updated_at"] %>
+            Updated <%= time_ago_in_words star.updated_at %>
           </span>
         </div>
       </div>
