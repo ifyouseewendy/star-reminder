@@ -1,7 +1,15 @@
+.stars h1 {
+  margin-bottom: 0;
+}
+
 .star {
   border-bottom: 1px #e1e4e8 solid;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.star:last-child {
+  border-bottom: 0;
 }
 
 .star-item h3 {
@@ -17,9 +25,12 @@
   color: #586069;
 }
 
+.star-tags {
+  display: flex;
+  justify-content: space-between;
+}
+
 .star-tag {
-  display: inline-block;
-  margin-right: 2em;
   color: #586069;
 }
 
