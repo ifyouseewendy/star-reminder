@@ -12,3 +12,5 @@ ActionView::Base.send :include, OcticonsHelper
 
 require_relative "star_reminder/mailer_config"
 require_relative "star_reminder/mailer"
+
+Ohm.redis = Redic.new(ENV["REDIS_HOST"])
