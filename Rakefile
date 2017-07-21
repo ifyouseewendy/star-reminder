@@ -17,28 +17,16 @@ end
 
 desc "Fetch starred projects and send an email"
 task :run do
-  # Octokit.auto_paginate = true
-  user = "ifyouseewendy"
+  email = "ifyouseewendy@gmail.com"
+  user = User.find_or_create_by(email: email)
 
-  stars = if "production" == ENV["RACK_ENV"]
-    Octokit.starred(user, per_page: 30).map do |star|
-      {
-        avatar_url: star.owner.avatar_url,
-        owner: star.owner.login,
-        name: star.name,
-        html_url: star.html_url,
-        description: star.description,
-        stargazers_count: star.stargazers_count,
-        watchers_count: star.watchers_count,
-        forks_count: star.forks_count,
-        language: star.language,
-        homepage: star.homepage,
-        updated_at: star.updated_at
-      }
-    end
-  else
-    JSON.parse File.read("tmp/sample.json")
-  end
+  username = "ifyouseewendy"
+  github_user = GithubUser.find_or_create_by(username: username)
+
+  user.follow(github_user) unless user.following.include? github_user
+
+  github_user.fetch_stars if github_user.stars.count.zero?
+  stars = github_user.stars
   puts "stars count: #{stars.count}"
 
   MailerConfig.load(ENV["RACK_ENV"])
