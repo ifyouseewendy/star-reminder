@@ -12,6 +12,7 @@ class GithubUser < Ohm::Model
   end
 
   def fetch_stars
+    puts "start fetching"
     # Octokit.auto_paginate = true
     Octokit.starred(username, per_page: 10).each do |star|
       GithubStar.create(

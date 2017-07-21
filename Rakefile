@@ -30,5 +30,5 @@ task :run do
   puts "stars count: #{stars.count}"
 
   MailerConfig.load(ENV["RACK_ENV"])
-  Mailer.welcome(to: "ifyouseewendy@gmail.com", payload: stars).deliver_now
+  Mailer.welcome(to: "pierowendy@gmail.com", payload: stars).deliver_now
 end
