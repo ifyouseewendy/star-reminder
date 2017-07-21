@@ -52,6 +52,8 @@ GEM
     erubi (1.6.1)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
+    foreman (0.83.0)
+      thor (~> 0.19.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hiredis (0.6.0)
@@ -158,6 +160,7 @@ DEPENDENCIES
   actionmailer
   awesome_print
   dotenv
+  foreman
   letter_opener
   octicons_helper
   octokit (~> 4.0)
