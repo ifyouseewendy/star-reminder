@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 class GithubStar < Ohm::Model
-  attribute :avatar_url
   attribute :owner
+  index :owner
+  attribute :avatar_url
   attribute :name
   attribute :html_url
   attribute :description
@@ -11,4 +12,6 @@ class GithubStar < Ohm::Model
   attribute :language
   attribute :homepage
   attribute :updated_at
+
+  reference :user, :GithubUser
 end
