@@ -14,3 +14,7 @@ group :development do
   gem "awesome_print"
   gem "foreman"
 end
+
+group :test do
+  gem "minitest"
+end

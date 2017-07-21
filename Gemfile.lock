@@ -162,6 +162,7 @@ DEPENDENCIES
   dotenv
   foreman
   letter_opener
+  minitest
   octicons_helper
   octokit (~> 4.0)
   ohm
