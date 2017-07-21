@@ -151,6 +151,7 @@
     "LiveScript": "#499886", 
     "JavaScript": "#f1e05a", 
     "VimL": "#199f4b", 
+    "Vim script": "#199f4b", 
     "PureScript": "#1D222D", 
     "ABAP": "#E8274B", 
     "Matlab": "#bb92ac", 
