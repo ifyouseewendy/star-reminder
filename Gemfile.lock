@@ -66,12 +66,15 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
+    metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.2.0)
     minitest (5.10.2)
+    mocha (1.2.1)
+      metaclass (~> 0.0.1)
     multipart-post (2.0.0)
     nest (3.1.1)
       redic
@@ -163,6 +166,7 @@ DEPENDENCIES
   foreman
   letter_opener
   minitest
+  mocha
   octicons_helper
   octokit (~> 4.0)
   ohm
