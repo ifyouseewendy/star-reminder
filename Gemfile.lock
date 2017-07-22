@@ -92,6 +92,8 @@ GEM
       nest (~> 3)
       redic (~> 1.5.0)
       stal
+    ohm-contrib (3.0.0)
+      ohm (~> 3.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -170,6 +172,7 @@ DEPENDENCIES
   octicons_helper
   octokit (~> 4.0)
   ohm
+  ohm-contrib
   pry-byebug
   roadie-rails
 

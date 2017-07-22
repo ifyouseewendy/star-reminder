@@ -7,6 +7,7 @@ gem "roadie-rails"
 gem "dotenv"
 gem "octicons_helper"
 gem "ohm"
+gem "ohm-contrib"
 
 group :development do
   gem "letter_opener"
