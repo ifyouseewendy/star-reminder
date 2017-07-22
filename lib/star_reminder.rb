@@ -16,4 +16,5 @@ require_relative "star_reminder/user"
 require_relative "star_reminder/github_user"
 require_relative "star_reminder/github_star"
 
-Ohm.redis = Redic.new(ENV["REDIS_HOST"])
+db = ENV["RACK_ENV"] == "test" ? "1" : "0"
+Ohm.redis = Redic.new([ENV["REDIS_HOST"].chomp("/"), db].join("/"))

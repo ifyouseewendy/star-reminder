@@ -1,1 +1,1 @@
-redis: redis-server /usr/local/etc/redis.conf &
+redis: redis-server /usr/local/etc/redis.conf
