@@ -5,14 +5,15 @@ describe GithubStar do
   let(:username) { "di" }
   let(:github_user) { GithubUser.with(:username, username) }
   let(:github_star) { GithubStar.find(user_id: github_user.id).first }
+  let(:fixture) { JSON.parse(File.read("test/fixtures/star.json")).with_indifferent_access }
 
   before do
     GithubUser.create(username: username)
-    GithubStar.create(user: github_user)
+    GithubStar.create_by(fixture, github_user)
   end
 
   after do
-    [GithubUser, GithubStar].each { |m| m.all.each(&:delete) }
+    Ohm.flush
   end
 
   it "should reference to a user" do
