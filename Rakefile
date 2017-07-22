@@ -43,5 +43,5 @@ end
 
 desc "Purge database"
 task :purge do
-  [User, GithubUser, GithubStar].each { |m| m.all.each(&:delete) }
+  Ohm.flush
 end
