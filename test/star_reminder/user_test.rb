@@ -26,5 +26,10 @@ describe User do
       user.follow(github_user)
       assert_equal github_user.id, user.following.first.id
     end
+
+    it "should return if there exists an association" do
+      assert user.follow(github_user)
+      refute user.follow(github_user)
+    end
   end
 end
