@@ -41,3 +41,7 @@ task :run do
   Mailer.welcome(to: "pierowendy@gmail.com", payload: stars).deliver_now
 end
 
+desc "Purge database"
+task :purge do
+  [User, GithubUser, GithubStar].each { |m| m.all.each(&:delete) }
+end
