@@ -11,7 +11,7 @@ class GithubStar < Model
   attribute :forks_count, Type::Integer
   attribute :language
   attribute :homepage
-  attribute :updated_at, Type::Time
+  attribute :updated_on, Type::Time
 
   reference :user, :GithubUser
 end

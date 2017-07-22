@@ -22,7 +22,7 @@ class GithubUser < Model
         forks_count: star.forks_count,
         language: star.language,
         homepage: star.homepage,
-        updated_at: star.updated_at,
+        updated_on: star.updated_at,
         user: self
       )
     end
