@@ -12,10 +12,6 @@ describe GithubUser do
     GithubUser.create(username: username)
   end
 
-  after do
-    Ohm.flush
-  end
-
   it "should reference to a user" do
     refute github_user.user
     user.follow(github_user)

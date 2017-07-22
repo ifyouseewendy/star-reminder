@@ -7,3 +7,10 @@ require "star_reminder"
 require "minitest/autorun"
 require "minitest/spec"
 require "mocha/mini_test"
+
+Minitest::Test.class_eval do
+  def teardown
+    Ohm.flush
+    super
+  end
+end

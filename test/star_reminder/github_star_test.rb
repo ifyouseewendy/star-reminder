@@ -12,10 +12,6 @@ describe GithubStar do
     GithubStar.create_by(fixture, github_user)
   end
 
-  after do
-    Ohm.flush
-  end
-
   it "should reference to a user" do
     assert_equal github_user.id, github_star.user.id
   end

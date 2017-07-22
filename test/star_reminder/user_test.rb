@@ -12,10 +12,6 @@ describe User do
     GithubUser.create(username: username)
   end
 
-  after do
-    Ohm.flush
-  end
-
   it "should persist the record" do
     assert_equal 1, User.all.count
   end

@@ -10,10 +10,6 @@ describe Model do
 
   let(:dog) { Dog.create(name: "Ruby", age: 3) }
 
-  after do
-    Ohm.flush
-  end
-
   describe "extensions" do
     it "should have timestamps" do
       assert dog.created_at
