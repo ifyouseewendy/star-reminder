@@ -2,6 +2,7 @@
 class Model < Ohm::Model
   include Ohm::Timestamps
   include Ohm::DataTypes
+  include Ohm::Callbacks
 
   def self.find_or_create_by(*args)
     find(*args).first || create(*args)

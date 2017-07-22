@@ -4,8 +4,16 @@ class User < Model
   unique :email
   index :email
 
+  counter :digest_count
+
   set :sent, :GithubStar
   collection :following, :GithubUser
+
+  DIGEST_COUNT = 2
+
+  def after_create
+    increment :digest_count, DIGEST_COUNT
+  end
 
   # TODO: unfollow
   def follow(github_user)
@@ -26,8 +34,6 @@ class User < Model
 
     Mailer.welcome(to: email, payload: digest).deliver_now
   end
-
-  DIGEST_COUNT = 2
 
   def digest
     stars = generate_digest

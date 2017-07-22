@@ -20,6 +20,12 @@ describe User do
     assert_equal 1, User.all.count
   end
 
+  describe "callbacks" do
+    it "should set a default digest count after create" do
+      assert User::DIGEST_COUNT, user.digest_count
+    end
+  end
+
   describe "#follow" do
     it "should create an association" do
       assert user.following.count.zero?
@@ -61,7 +67,7 @@ describe User do
 
     it "should randomly fetch stars for empty sent" do
       assert_empty user.sent
-      assert_equal 2, user.digest.count
+      assert_equal user.digest_count, user.digest.count
     end
 
     it "should fetch stars excluding sent" do
@@ -73,7 +79,7 @@ describe User do
     it "should refresh fetching when there are not enough stars to digest" do
       user.expects(:generate_digest).with(nil).returns([]).once
       user.expects(:generate_digest).with(refresh: true).returns([0] * 2).once
-      assert_equal 2, user.digest.count
+      assert_equal user.digest_count, user.digest.count
     end
 
     it "should return empty when there are not enough stars to digest even after refreshing" do
