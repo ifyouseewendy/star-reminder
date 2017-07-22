@@ -20,18 +20,6 @@ describe User do
     assert_equal 1, User.all.count
   end
 
-  describe ".find_or_create_by" do
-    it "should find an existent record" do
-      assert user.id, User.find_or_create_by(email: email)
-    end
-
-    it "should create a new record" do
-      assert_in_delta User.all.count, 1 do
-        User.find_or_create_by(email: "fake@example.com")
-      end
-    end
-  end
-
   describe "#follow" do
     it "should create an association" do
       assert user.following.count.zero?

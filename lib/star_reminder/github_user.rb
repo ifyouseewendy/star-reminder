@@ -1,15 +1,11 @@
 # frozen_string_literal: true
-class GithubUser < Ohm::Model
+class GithubUser < Model
   attribute :username
   unique :username
   index :username
 
   reference :user, :User
   collection :stars, :GithubStar, :user
-
-  def self.find_or_create_by(*args)
-    find(*args).first || create(*args)
-  end
 
   def fetch_stars
     puts "start fetching"
