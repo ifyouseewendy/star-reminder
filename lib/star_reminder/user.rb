@@ -4,8 +4,10 @@ class User < Model
   unique :email
   index :email
 
+  set :sent, :GithubStar
   collection :following, :GithubUser
 
+  # TODO: unfollow
   def follow(github_user)
     return if followed? github_user
     github_user.user = self
@@ -16,5 +18,36 @@ class User < Model
     following.include? github_user
   end
 
-  # TODO: unfollow
+  def send_digest
+    if digest.count.zero?
+      puts "No digest to send"
+      return
+    end
+
+    Mailer.welcome(to: email, payload: digest).deliver_now
+  end
+
+  DIGEST_COUNT = 2
+
+  def digest
+    stars = generate_digest
+    return stars if stars.count >= DIGEST_COUNT
+
+    stars = generate_digest(refresh: true)
+    return stars if stars.count >= DIGEST_COUNT
+
+    []
+  end
+
+  def generate_digest(refresh: false)
+    fetch_stars if refresh
+
+    following.reduce([]) do |ret, source_user|
+      ret + source_user.stars.select { |st| !sent.include?(st) }.sample(DIGEST_COUNT)
+    end
+  end
+
+  def fetch_stars
+    following.each(&:fetch_stars)
+  end
 end

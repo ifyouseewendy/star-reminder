@@ -8,7 +8,7 @@ describe GithubStar do
   let(:fixture) { JSON.parse(File.read("test/fixtures/star.json")).with_indifferent_access }
 
   before do
-    GithubUser.create(username: username)
+    GithubUser.find_or_create_by(username: username)
     GithubStar.create_by(fixture, github_user)
   end
 

@@ -13,7 +13,7 @@ describe User do
   end
 
   after do
-    [User, GithubUser].each { |m| m.all.each(&:delete) }
+    Ohm.flush
   end
 
   it "should persist the record" do
@@ -27,9 +27,59 @@ describe User do
       assert_equal github_user.id, user.following.first.id
     end
 
-    it "should return if there exists an association" do
+    it "should be idempotent to follow a github_user" do
       assert user.follow(github_user)
       refute user.follow(github_user)
+    end
+  end
+
+  describe "#send_digest" do
+    it "should send digests using Mailer" do
+      payload = [0] * 2
+      user.stubs(:digest).returns(payload)
+      Mailer.expects(:welcome).with(to: user.email, payload: payload).returns(stub(deliver_now: nil))
+
+      user.send_digest
+    end
+
+    it "should return if there are no digest to send" do
+      user.stubs(:digest).returns([])
+      refute user.send_digest
+    end
+  end
+
+  describe "#digest" do
+    let(:fixture) { JSON.parse(File.read("test/fixtures/star.json")).with_indifferent_access }
+    let(:github_star) { GithubStar.find(user_id: github_user.id).first }
+
+    before do
+      user.follow(github_user)
+      3.times { GithubStar.create_by(fixture, github_user) }
+
+      user.stubs(:fetch_stars).returns([0] * 5)
+    end
+
+    it "should randomly fetch stars for empty sent" do
+      assert_empty user.sent
+      assert_equal 2, user.digest.count
+    end
+
+    it "should fetch stars excluding sent" do
+      fst, *snd = GithubStar.all.to_a
+      user.sent.add fst
+      assert_equal snd, user.digest.sort_by(&:id)
+    end
+
+    it "should refresh fetching when there are not enough stars to digest" do
+      user.expects(:generate_digest).with(nil).returns([]).once
+      user.expects(:generate_digest).with(refresh: true).returns([0] * 2).once
+      assert_equal 2, user.digest.count
+    end
+
+    it "should return empty when there are not enough stars to digest even after refreshing" do
+      user.expects(:generate_digest).with(nil).returns([]).once
+      user.expects(:generate_digest).with(refresh: true).returns([0] * 1).once
+      assert_equal [], user.digest
     end
   end
 end
