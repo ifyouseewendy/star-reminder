@@ -19,3 +19,5 @@ require_relative "star_reminder/github_star"
 
 db = ENV["RACK_ENV"] == "test" ? "1" : "0"
 Ohm.redis = Redic.new([ENV["REDIS_HOST"].chomp("/"), db].join("/"))
+
+MailerConfig.load(ENV["RACK_ENV"])

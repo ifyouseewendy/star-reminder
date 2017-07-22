@@ -25,20 +25,11 @@ end
 
 desc "Fetch starred projects and send an email"
 task :run do
-  email = "ifyouseewendy@gmail.com"
-  user = User.find_or_create_by(email: email)
+  user = User.find_or_create_by(email: "ifyouseewendy@gmail.com")
+  github_user = GithubUser.find_or_create_by(username: "ifyouseewendy")
+  user.follow(github_user)
 
-  username = "ifyouseewendy"
-  github_user = GithubUser.find_or_create_by(username: username)
-
-  user.follow(github_user) unless user.following.include? github_user
-
-  github_user.fetch_stars if github_user.stars.count.zero?
-  stars = github_user.stars
-  puts "stars count: #{stars.count}"
-
-  MailerConfig.load(ENV["RACK_ENV"])
-  Mailer.welcome(to: "pierowendy@gmail.com", payload: stars).deliver_now
+  user.send_digest
 end
 
 desc "Purge database"
