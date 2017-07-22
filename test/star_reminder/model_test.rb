@@ -36,6 +36,16 @@ describe Model do
     end
   end
 
+  describe ".find_all" do
+    it "should support a union query" do
+      Dog.create(name: "Ruby", age: 2)
+      assert_equal 1, Dog.find_all(name: "Ruby").count
+
+      Dog.create(name: "Rocky", age: 2)
+      assert_equal 2, Dog.find_all(name: ["Ruby", "Rocky"]).count
+    end
+  end
+
   describe "#attributes" do
     it "should display all the attributes" do
       assert_includes dog.attributes.keys, :id
