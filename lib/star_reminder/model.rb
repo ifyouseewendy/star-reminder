@@ -25,5 +25,9 @@ class Model < Ohm::Model
     super.merge self.class.attributes.each_with_object({}) { |e, h| h[e] = public_send(e) }
   end
 
+  def logger
+    @_logger ||= Logger.new STDOUT
+  end
+
   alias_method :attributes, :to_hash
 end

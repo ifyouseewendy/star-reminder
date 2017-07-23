@@ -8,7 +8,7 @@ class GithubUser < Model
   collection :stars, :GithubStar, :user
 
   def fetch_stars
-    puts "start fetching"
+    logger.info "start fetching"
     # Octokit.auto_paginate = true
     # TODO: Remove duplicates
     Octokit.starred(username, per_page: 10).each do |star|

@@ -28,13 +28,13 @@ class User < Model
   def send_digest
     stars = digest
     if stars.count.zero?
-      puts "No digest to send"
+      logger.info "No digest to send"
       return
     end
 
     Mailer.welcome(to: email, payload: stars).deliver_now
   rescue => e
-    puts "Email failed to send"
+    logger.info "Email failed to send"
     raise e
   else
     flag_sent(stars)
