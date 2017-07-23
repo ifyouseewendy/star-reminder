@@ -29,3 +29,5 @@ module MailerConfig
     end
   end
 end
+
+MailerConfig.load(StarReminder.env)
