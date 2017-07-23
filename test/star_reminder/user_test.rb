@@ -36,9 +36,18 @@ describe User do
   end
 
   describe "#send_digest" do
+    let(:fixture) { JSON.parse(File.read("test/fixtures/star.json")).with_indifferent_access }
+    let(:github_star) { GithubStar.find(user_id: github_user.id).first }
+
+    before do
+      user.follow(github_user)
+      GithubStar.create_by(fixture, github_user)
+    end
+
     it "should send digests using Mailer" do
       payload = [0] * 2
       user.stubs(:digest).returns(payload)
+      user.stubs(:flag_sent).returns(nil)
       Mailer.expects(:welcome).with(to: user.email, payload: payload).returns(stub(deliver_now: nil))
 
       user.send_digest
@@ -47,6 +56,15 @@ describe User do
     it "should return if there are no digest to send" do
       user.stubs(:digest).returns([])
       refute user.send_digest
+    end
+
+    it "should flag the messages have been sent" do
+      user.stubs(:digest).returns([github_star] * 2)
+      Mailer.stubs(:welcome).returns(stub(deliver_now: nil))
+
+      assert_equal 0, user.sent.count
+      user.send_digest
+      assert_equal github_star, user.sent.first
     end
   end
 

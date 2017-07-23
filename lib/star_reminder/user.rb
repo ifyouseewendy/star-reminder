@@ -5,7 +5,6 @@ class User < Model
   index :email
 
   counter :digest_count
-
   set :sent, :GithubStar
   collection :following, :GithubUser
 
@@ -27,12 +26,18 @@ class User < Model
   end
 
   def send_digest
-    if digest.count.zero?
+    stars = digest
+    if stars.count.zero?
       puts "No digest to send"
       return
     end
 
-    Mailer.welcome(to: email, payload: digest).deliver_now
+    Mailer.welcome(to: email, payload: stars).deliver_now
+  rescue => e
+    puts "Email failed to send"
+    raise e
+  else
+    flag_sent(stars)
   end
 
   def digest
@@ -55,5 +60,11 @@ class User < Model
 
   def fetch_stars
     following.each(&:fetch_stars)
+  end
+
+  private
+
+  def flag_sent(stars)
+    redis.call "sadd", key[:sent], *stars.map(&:id)
   end
 end
