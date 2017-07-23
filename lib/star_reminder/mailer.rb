@@ -7,7 +7,7 @@ class Mailer < ActionMailer::Base
 
   helper do
     def colors
-      @_colors ||= JSON.parse File.read("resource/colors.json")
+      @_colors ||= JSON.parse File.read(StarReminder.root.join("resource/colors.json"))
     end
   end
 
@@ -20,7 +20,7 @@ class Mailer < ActionMailer::Base
 
   def roadie_options
     @roadie_options ||= Roadie::Rails::Options.new(
-      asset_providers: Roadie::FilesystemProvider.new("/Users/wendi/Workspace/star-reminder/lib/star_reminder/assets")
+      asset_providers: Roadie::FilesystemProvider.new(StarReminder.root.join("lib/star_reminder/assets"))
     )
   end
 end

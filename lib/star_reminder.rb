@@ -16,14 +16,18 @@ module StarReminder
         public_send(:env) == e
       end
     end
+
+    def root
+      @root ||= Pathname.new("../../").expand_path(__FILE__)
+    end
   end
 end
 
 require_relative "star_reminder/mailer_config"
+MailerConfig.load(StarReminder.env)
+
 require_relative "star_reminder/mailer"
 require_relative "star_reminder/model"
 require_relative "star_reminder/user"
 require_relative "star_reminder/github_user"
 require_relative "star_reminder/github_star"
-
-MailerConfig.load(StarReminder.env)
