@@ -16,6 +16,13 @@ describe GithubStar do
     assert_equal github_user.id, github_star.user.id
   end
 
+  describe "#to_s" do
+    it "should show identifier" do
+      GithubStar.find_or_create_by(fixture, github_user)
+      assert_equal "GithubStar<mojombo/grit>", github_star.to_s
+    end
+  end
+
   describe ".find_or_create_by" do
     it "should create a star with user associated" do
       assert_equal 0, github_user.stars.count

@@ -34,4 +34,8 @@ class GithubStar < Model
       user: user
     )
   end
+
+  def to_s
+    "#{self.class.name}<#{owner}/#{name}>"
+  end
 end

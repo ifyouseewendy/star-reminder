@@ -24,6 +24,12 @@ describe GithubUser do
     assert_equal 1, github_user.stars.count
   end
 
+  describe "#to_s" do
+    it "should show identifier" do
+      assert_equal "GithubUser<di>", github_user.to_s
+    end
+  end
+
   describe "#fetch_stars" do
     it "should request Github API" do
       Octokit.expects(:starred).returns([{}])

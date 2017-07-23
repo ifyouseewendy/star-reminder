@@ -22,6 +22,12 @@ describe User do
     end
   end
 
+  describe "#to_s" do
+    it "should show identifier" do
+      assert_equal "User<di@example.com>", user.to_s
+    end
+  end
+
   describe "#follow" do
     it "should create an association" do
       assert user.following.count.zero?

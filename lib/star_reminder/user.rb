@@ -28,15 +28,16 @@ class User < Model
   def send_digest
     stars = digest
     if stars.count.zero?
-      logger.info "No digest to send"
+      logger.info "No digest to send to #{self}"
       return
     end
 
     Mailer.welcome(to: email, payload: stars).deliver_now
   rescue => e
-    logger.info "Email failed to send"
+    logger.error "Failed sending email to #{self}"
     raise e
   else
+    logger.info "Successfully sent email to #{self}"
     flag_sent(stars)
   end
 
@@ -60,6 +61,10 @@ class User < Model
 
   def fetch_stars
     following.each(&:fetch_stars)
+  end
+
+  def to_s
+    "#{self.class.name}<#{email}>"
   end
 
   private
