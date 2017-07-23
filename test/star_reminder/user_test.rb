@@ -41,7 +41,7 @@ describe User do
 
     before do
       user.follow(github_user)
-      GithubStar.create_by(fixture, github_user)
+      GithubStar.find_or_create_by(fixture, github_user)
     end
 
     it "should send digests using Mailer" do
@@ -74,7 +74,10 @@ describe User do
 
     before do
       user.follow(github_user)
-      3.times { GithubStar.create_by(fixture, github_user) }
+      3.times do |i|
+        new_star = fixture.merge(name: "fixture[:name]#{i}")
+        GithubStar.find_or_create_by(new_star, github_user)
+      end
 
       user.stubs(:fetch_stars).returns([0] * 5)
     end

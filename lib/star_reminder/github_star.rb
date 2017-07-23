@@ -4,6 +4,7 @@ class GithubStar < Model
   index :owner
   attribute :avatar_url
   attribute :name
+  index :name
   attribute :html_url
   attribute :description
   attribute :stargazers_count, Type::Integer
@@ -15,7 +16,9 @@ class GithubStar < Model
 
   reference :user, :GithubUser
 
-  def self.create_by(star, user)
+  def self.find_or_create_by(star, user)
+    return if user.stars.find(owner: star[:owner][:login], name: star[:name]).count.positive?
+
     create(
       owner: star[:owner][:login],
       avatar_url: star[:owner][:avatar_url],
