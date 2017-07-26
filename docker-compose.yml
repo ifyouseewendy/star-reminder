@@ -1,0 +1,12 @@
+version: '3'
+services:
+  redis_db:
+    image: redis:4.0
+  script:
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - ./.production.env
+    depends_on:
+      - redis_db
