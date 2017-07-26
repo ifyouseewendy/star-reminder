@@ -1,8 +1,10 @@
 FROM ruby:2.3
 
 WORKDIR /app
-ADD . /app
 
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
-ENV RACK_ENV production
-CMD ["bundle", "exec", "pry"]
+
+ADD . .
+ENTRYPOINT ["bundle", "exec"]
+CMD ["rake", "console"]
