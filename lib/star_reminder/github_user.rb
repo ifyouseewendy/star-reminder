@@ -8,7 +8,7 @@ class GithubUser < Model
   collection :stars, :GithubStar, :user
 
   def fetch_stars
-    # Octokit.auto_paginate = true
+    Octokit.auto_paginate = true
     Octokit
       .starred(username, per_page: 10)
       .tap { |s| logger.info "Fetched #{s.count} stars from #{self} for #{user}" }
