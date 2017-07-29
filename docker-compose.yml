@@ -2,6 +2,8 @@ version: '3'
 services:
   redis_db:
     image: redis:4.0
+    volumes:
+      - data:/data
   script:
     build: .
     volumes:
@@ -10,3 +12,5 @@ services:
       - ./.production.env
     depends_on:
       - redis_db
+volumes:
+  data:
