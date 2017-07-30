@@ -5,6 +5,7 @@ services:
     volumes:
       - data:/data
   script:
+    image: ifyouseewendy/star-reminder:0.1
     build: .
     volumes:
       - .:/app
