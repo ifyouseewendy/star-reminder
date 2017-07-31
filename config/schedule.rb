@@ -22,6 +22,6 @@
 
 set :output, "log/cron.log"
 
-every 1.minute do
+every 1.day, at: "8:00 am" do
   rake "run"
 end
