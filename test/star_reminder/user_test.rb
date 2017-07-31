@@ -110,5 +110,11 @@ describe User do
       user.expects(:generate_digest).with(refresh: true).returns([0] * 1).once
       assert_equal [], user.digest
     end
+
+    it "should generate digests by user digest count" do
+      user.stubs(:digest_count).returns(0)
+
+      assert_empty user.digest
+    end
   end
 end

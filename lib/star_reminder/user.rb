@@ -43,10 +43,10 @@ class User < Model
 
   def digest
     stars = generate_digest
-    return stars if stars.count >= DIGEST_COUNT
+    return stars if stars.count >= digest_count
 
     stars = generate_digest(refresh: true)
-    return stars if stars.count >= DIGEST_COUNT
+    return stars if stars.count >= digest_count
 
     []
   end
@@ -55,7 +55,7 @@ class User < Model
     fetch_stars if refresh
 
     following.reduce([]) do |ret, source_user|
-      ret + source_user.stars.select { |st| !sent.include?(st) }.sample(DIGEST_COUNT)
+      ret + source_user.stars.select { |st| !sent.include?(st) }.sample(digest_count)
     end
   end
 
