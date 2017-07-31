@@ -17,5 +17,5 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 ADD . .
 
-RUN bundle exec whenever > /app/tmp/crontab
-CMD supercronic /app/tmp/crontab
+RUN bundle exec whenever > /tmp/crontab
+CMD supercronic /tmp/crontab
