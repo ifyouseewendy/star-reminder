@@ -10,7 +10,7 @@ class GithubUser < Model
   def fetch_stars
     Octokit.auto_paginate = true
     Octokit
-      .starred(username, per_page: 10)
+      .starred(username)
       .tap { |s| logger.info "Fetched #{s.count} stars from #{self} for #{user}" }
       .each { |star| GithubStar.find_or_create_by(star.to_hash, self) }
   end
