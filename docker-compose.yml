@@ -9,8 +9,6 @@ services:
     build: .
     volumes:
       - .:/app
-    env_file:
-      - ./.production.env
     depends_on:
       - redis_db
 volumes:
