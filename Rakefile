@@ -25,11 +25,14 @@ end
 
 desc "Fetch starred projects and send an email"
 task :run do
-  user = User.find_or_create_by(email: "ifyouseewendy@gmail.com")
-  github_user = GithubUser.find_or_create_by(username: "ifyouseewendy")
-  user.follow(github_user)
+  User.all.each(&:send_digest)
+end
 
-  user.send_digest
+desc "Add new UESR with followed GITHUB_USER"
+task :add_user do
+  user = User.find_or_create_by(email: ENV["USER"])
+  github_user = GithubUser.find_or_create_by(username: ENV["GITHUB_USER"])
+  user.follow(github_user)
 end
 
 desc "Purge database"
