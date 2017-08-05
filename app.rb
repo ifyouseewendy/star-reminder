@@ -1,5 +1,8 @@
-require 'sinatra'
+# frozen_string_literal: true
+require "sinatra/base"
 
-get '/' do
-  'Hello world!'
+class MyApp < Sinatra::Base
+  get "/" do
+    erb :index
+  end
 end
