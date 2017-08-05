@@ -9,6 +9,7 @@ gem "octicons_helper"
 gem "ohm"
 gem "ohm-contrib"
 gem "whenever", require: false
+gem "sinatra"
 
 group :development do
   gem "letter_opener"
