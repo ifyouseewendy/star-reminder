@@ -29,5 +29,9 @@ class Model < Ohm::Model
     @_logger ||= StarReminder.logger
   end
 
+  def statsd
+    @_statsd ||= StarReminder.statsd
+  end
+
   alias_method :attributes, :to_hash
 end

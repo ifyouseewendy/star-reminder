@@ -49,6 +49,7 @@ GEM
     concurrent-ruby (1.0.5)
     css_parser (1.5.0)
       addressable
+    dogstatsd-ruby (3.0.0)
     dotenv (2.0.2)
     erubi (1.6.1)
     faraday (0.12.1)
@@ -170,6 +171,7 @@ PLATFORMS
 DEPENDENCIES
   actionmailer
   awesome_print
+  dogstatsd-ruby
   dotenv
   foreman
   letter_opener

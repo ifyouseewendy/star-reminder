@@ -36,6 +36,10 @@ module StarReminder
         Logger.new STDOUT
       end
     end
+
+    def statsd
+      Datadog::Statsd.new
+    end
   end
 end
 
