@@ -26,7 +26,7 @@ class Model < Ohm::Model
   end
 
   def logger
-    @_logger ||= Logger.new STDOUT
+    @_logger ||= StarReminder.logger
   end
 
   alias_method :attributes, :to_hash

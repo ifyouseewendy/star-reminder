@@ -28,6 +28,14 @@ module StarReminder
     def root
       @root ||= Pathname.new("../../../").expand_path(__FILE__)
     end
+
+    def logger
+      if production?
+        Logglier.new("https://logs-01.loggly.com/inputs/#{ENV['LOGGLY_API_KEY']}/tag/ruby/", threaded: true)
+      else
+        Logger.new STDOUT
+      end
+    end
   end
 end
 

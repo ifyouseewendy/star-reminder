@@ -21,3 +21,7 @@ group :test do
   gem "minitest"
   gem "mocha"
 end
+
+group :production do
+  gem "logglier", "~> 0.2.11"
+end
