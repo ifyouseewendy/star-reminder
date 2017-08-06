@@ -18,6 +18,17 @@ To generalize:
 
 + a service to notify (email, slack..) user a digest of an amount (2, 3...) of starred items (Github projects, Stack Overflow answers...) at a designated time (9am, 4pm...) every once a while (everyday, every week...). #v8
 
+## Vesion 0.1
+
++ Set up mailer template
++ Request Github API by Octokit
++ Create model by Ohm
++ Add tests
++ Build scripts for basic tasks
++ Add crontab jobs by whenever
++ Dockerize
++ Use Circle CI to run tests and build image
+
 ## Development
 
 1. To fill in the `.env`
@@ -54,6 +65,14 @@ $ docker-compose build --pull
 $ docker-compose up &
 $ # docker-compose restart &
 ```
+
+4. Manually add user email and github username
+
+```sh
+$ rake add_user USER=ifyouseewendy@gmail.com GITHUB_USER=ifyouseewendy
+```
+
+5. Send email every day
 
 Note:
 
