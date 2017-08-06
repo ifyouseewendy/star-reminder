@@ -18,6 +18,16 @@ To generalize:
 
 + a service to notify (email, slack..) user a digest of an amount (2, 3...) of starred items (Github projects, Stack Overflow answers...) at a designated time (9am, 4pm...) every once a while (everyday, every week...). #v8
 
+## Vesion 0.1
+
++ Set up mailer template
++ Request Github API with Octokit
++ Create model with Ohm
++ Add tests
++ Build scripts for basic tasks
++ Dockerize
++ Use Circle CI to run tests and build image
+
 ## Development
 
 1. To fill in the `.env`
