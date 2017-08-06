@@ -39,3 +39,8 @@ desc "Purge database"
 task :purge do
   Ohm.flush
 end
+
+desc "Test StatsD integration"
+task :statsd do
+  StarReminder.statsd.event("This is a test message from rake statsd", "")
+end
