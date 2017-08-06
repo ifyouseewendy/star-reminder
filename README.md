@@ -51,6 +51,9 @@ $ bundle exec rake -T
 
 ## Deployment
 
++ [CircleCI](https://circleci.com/gh/ifyouseewendy/star-reminder/tree/master)
++ [Loggly](https://ifyouseewendy.loggly.com/search?terms=tag:ruby)
+
 1. After Git push the new changes, Circle CI will run the tests and build the image, which is at [hub.docker.com/r/ifyouseewendy/star-reminder/](https://hub.docker.com/r/ifyouseewendy/star-reminder/)
 
 2. To fetch the update and build
