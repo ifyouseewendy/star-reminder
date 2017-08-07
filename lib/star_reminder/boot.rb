@@ -38,7 +38,7 @@ module StarReminder
     end
 
     def statsd
-      Datadog::Statsd.new
+      production? ? Datadog::Statsd.new(*ENV["DATADOG_HOST"].split(":")) : Datadog::Statsd.new
     end
   end
 end
