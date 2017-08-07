@@ -1,0 +1,18 @@
+{
+  "name": "star-reminder",
+  "version": "1.0.0",
+  "main": "public/index.js",
+  "repository": "git@github.com:ifyouseewendy/star-reminder.git",
+  "author": "Di Wen <ifyouseewendy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "webpack": "^3.4.1"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
+}
