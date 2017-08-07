@@ -53,6 +53,7 @@ $ bundle exec rake -T
 
 + [CircleCI](https://circleci.com/gh/ifyouseewendy/star-reminder/tree/master)
 + [Loggly](https://ifyouseewendy.loggly.com/search?terms=tag:ruby)
++ [Datadog](https://app.datadoghq.com/dash/336154/star-reminder?live=true&page=0&is_auto=false&from_ts=1502122701232&to_ts=1502126301232&tile_size=m)
 
 1. After Git push the new changes, Circle CI will run the tests and build the image, which is at [hub.docker.com/r/ifyouseewendy/star-reminder/](https://hub.docker.com/r/ifyouseewendy/star-reminder/)
 
