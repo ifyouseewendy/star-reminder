@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./app";
 import "./index.css";
 
 window.Application = {
-  render: function() {
-    ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById("root"));
+  render() {
+    ReactDOM.render(<App />, document.getElementById("root"));
   },
 };
 
