@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": "airbnb",
   "parserOptions": {
@@ -11,11 +12,23 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["react"],
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
-    "semi": ["error", "always"]
-  }
+    "semi": ["error", "always"],
+    "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
+    "react/jsx-key": ["error"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore"
+    }],
+    "no-plusplus": ["off"]
+  },
+  "plugins": [
+    "react"
+  ]
 }
