@@ -6,7 +6,7 @@ require "bundler/setup"
 require "dotenv"
 Dotenv.load
 
-ENV["RACK_ENV"] ||= "development"
+ENV["RACK_ENV"] = "development" if ENV["RACK_ENV"].nil? || ENV["RACK_ENV"].empty?
 Bundler.require(:default, ENV["RACK_ENV"])
 
 module StarReminder
