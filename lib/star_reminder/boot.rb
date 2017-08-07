@@ -38,7 +38,9 @@ module StarReminder
     end
 
     def statsd
-      production? ? Datadog::Statsd.new(*ENV["DATADOG_HOST"].split(":")) : Datadog::Statsd.new
+      host, port = ENV["DATADOG_HOST"].to_s.split(":")
+      opts = { namespace: name }
+      Datadog::Statsd.new(host, port, opts)
     end
   end
 end

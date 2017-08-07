@@ -12,7 +12,7 @@ class User < Model
 
   def after_create
     increment :digest_count, DIGEST_COUNT
-    statsd.increment("user.count")
+    statsd.increment("user", sample_rate: 1)
   end
 
   # TODO: unfollow
@@ -34,7 +34,7 @@ class User < Model
     end
 
     Mailer.welcome(to: email, payload: stars).deliver_now
-    statsd.increment("user.sent.count")
+    statsd.increment("user.sent", sample_rate: 1)
   rescue => e
     logger.error "Failed sending email to #{self}"
     raise e
