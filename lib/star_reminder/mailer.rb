@@ -7,7 +7,7 @@ class Mailer < ActionMailer::Base
 
   helper do
     def colors
-      @_colors ||= JSON.parse File.read(StarReminder.root.join("resource/colors.json"))
+      @_colors ||= JSON.parse File.read(StarReminder.root.join("lib/star_reminder/assets/colors.json"))
     end
   end
 
