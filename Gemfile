@@ -11,6 +11,8 @@ gem "ohm-contrib"
 gem "whenever", require: false
 gem "dogstatsd-ruby", require: "datadog/statsd"
 gem "sinatra"
+gem "omniauth"
+gem "omniauth-github"
 
 group :development do
   gem "letter_opener"
