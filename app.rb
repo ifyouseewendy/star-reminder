@@ -17,11 +17,29 @@ class MyApp < Sinatra::Base
   end
 
   get "/auth/:provider/callback" do
-    auth = env["omniauth.auth"]
-    access_token = auth["credentials"]["token"]
+    begin
+      auth = env["omniauth.auth"]
+      email = auth["info"]["email"]
+      username = auth["info"]["nickname"]
+      access_token = auth["credentials"]["token"]
 
-    # Octokit
-    client = Octokit::Client.new(access_token: access_token) # auto_paginate: true
-    client.starred("ifyouseewendy", per_page: 3).to_json
+      user = User.create(email: email)
+      github_user = GithubUser.create(username: username, access_token: access_token)
+      user.follow(github_user)
+
+      logger.info "Successfully auth callback on user: #{email} and github user: #{username}"
+      { status: :succeed }.to_json
+    rescue => e
+      logger.error "failed on auth callback: #{e.message}"
+      logger.error e.backtrace
+
+      { status: :failed, error: { message: e.message, backtrace: e.backtrace } }.to_json
+    end
+  end
+
+  private
+
+  def logger
+    @_logger ||= StarReminder.logger
   end
 end
