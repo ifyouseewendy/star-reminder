@@ -4,19 +4,15 @@ import { AppContainer } from "react-hot-loader";
 import App from "./app";
 import "./style.css";
 
-const render = (Component) => {
+const render = (view) => {
   ReactDOM.render(
     <AppContainer>
-      <Component />
+      <App {...view} />
     </AppContainer>,
     document.getElementById("root"),
   );
 };
 
-render(App);
-
-if (module.hot) {
-  module.hot.accept("./app", () => {
-    render(App);
-  });
-}
+window.Application = {
+  render,
+};
