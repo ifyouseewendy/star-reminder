@@ -5,7 +5,6 @@ require "omniauth"
 require "securerandom"
 
 class MyApp < Sinatra::Base
-  use Rack::Session::Cookie
   use OmniAuth::Strategies::Developer
   use OmniAuth::Builder do
     provider :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"]
@@ -18,15 +17,17 @@ class MyApp < Sinatra::Base
   set :views, File.dirname(__FILE__) + "/src"
 
   get "/" do
-    # File.read("src/index.html")
-    erb :"index.html", locals: { view: { email: "wendi" } }
+    File.read("src/index.html")
+  end
+
+  get "/user" do
+    { email: session[:email] }.to_json
   end
 
   get "/auth/:provider/callback" do
     begin
       auth = env["omniauth.auth"]
-      email = auth["info"]["email"]
-      username = auth["info"]["nickname"]
+      email, username = auth["info"].values_at("email", "username")
       access_token = auth["credentials"]["token"]
 
       user = User.create(email: email)
