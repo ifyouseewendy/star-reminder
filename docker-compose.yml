@@ -7,7 +7,7 @@ services:
   dogstatsd:
     image: datadog/docker-dd-agent:latest
     ports:
-      - "8129:8129/udp"
+      - "8125:8125/udp"
     environment:
       - SD_BACKEND=docker
       - API_KEY=${DATADOG_API_KEY}
