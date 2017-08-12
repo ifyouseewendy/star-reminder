@@ -32,7 +32,7 @@ describe GithubUser do
 
   describe "#fetch_stars" do
     it "should request Github API" do
-      Octokit.expects(:starred).returns([{}])
+      Octokit::Client.any_instance.expects(:starred).returns([{}])
       GithubStar.expects(:find_or_create_by).returns(nil)
 
       github_user.fetch_stars
