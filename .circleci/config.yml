@@ -68,9 +68,10 @@ jobs:
 
       # build and push Docker image
       - run: |
-          TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t ifyouseewendy/star-reminder:$TAG ifyouseewendy/star-reminder:latest .
           docker login -u $DOCKER_USER -p $DOCKER_PASS
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t ifyouseewendy/star-reminder:$TAG .
           docker push ifyouseewendy/star-reminder:$TAG
+          docker build -t ifyouseewendy/star-reminder:latest .
           docker push ifyouseewendy/star-reminder:latest
 
