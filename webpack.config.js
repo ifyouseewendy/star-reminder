@@ -3,7 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: ["react-hot-loader/patch", "./src/index.js"],
+  entry: ["whatwg-fetch", "react-hot-loader/patch", "./src/index.js"],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
