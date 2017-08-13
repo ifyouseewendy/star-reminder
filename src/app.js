@@ -82,20 +82,8 @@ class App extends Component {
                 alignment="trailing"
                 distribution="fill"
               >
-                <Select
-                  label="Send email"
-                  options={["every week", "every day"]}
-                  value={this.state.delivery.frequency}
-                  onChange={selected =>
-                    this.setState({
-                      delivery: {
-                        ...this.state.delivery,
-                        frequency: selected,
-                      },
-                    })
-                  }
-                />
                 <TextField
+                  label="Send email"
                   prefix="at"
                   type="number"
                   min="1"
@@ -124,6 +112,18 @@ class App extends Component {
                         })
                       }
                     />
+                  }
+                />
+                <Select
+                  options={["every week", "every day"]}
+                  value={this.state.delivery.frequency}
+                  onChange={selected =>
+                    this.setState({
+                      delivery: {
+                        ...this.state.delivery,
+                        frequency: selected,
+                      },
+                    })
                   }
                 />
               </Stack>
