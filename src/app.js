@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  Layout,
-  Heading,
-  DisplayText,
-  CalloutCard,
   Button,
+  CalloutCard,
   Card,
+  DisplayText,
   FormLayout,
+  Layout,
+  Select,
+  Stack,
   TextField,
 } from "@shopify/polaris";
 
@@ -17,6 +18,11 @@ class App extends Component {
     this.state = {
       digestCount: props.digestCount,
       deliveryAt: props.deliveryAt,
+      delivery: {
+        frequency: "every week",
+        hour: "8",
+        meridiem: "am",
+      },
     };
   }
 
@@ -49,6 +55,7 @@ class App extends Component {
   }
 
   renderDashboard() {
+    console.log(this.state);
     return (
       <Layout>
         <Layout.Section>
@@ -71,13 +78,53 @@ class App extends Component {
                 value={this.props.githubUserName}
                 disabled
               />
-              <TextField
-                label="Delivery at"
-                name="delivery-at"
-                type="datetime-local"
-                value={this.state.deliveryAt}
-                onChange={v => this.setState({ deliveryAt: v })}
-              />
+              <DisplayText size="smail">Send email</DisplayText>
+              <Stack spacing="loose">
+                <Select
+                  label=""
+                  options={["every week", "every day"]}
+                  value={this.state.delivery.frequency}
+                  onChange={selected =>
+                    this.setState({
+                      delivery: {
+                        ...this.state.delivery,
+                        frequency: selected,
+                      },
+                    })
+                  }
+                />
+                <TextField
+                  prefix="at"
+                  type="number"
+                  min="1"
+                  max="12"
+                  value={this.state.delivery.hour}
+                  onChange={v =>
+                    this.setState({
+                      delivery: {
+                        ...this.state.delivery,
+                        hour: v,
+                      },
+                    })
+                  }
+                  connectedRight={
+                    <Select
+                      label="meridiem"
+                      labelHidden
+                      options={["am", "pm"]}
+                      value={this.state.delivery.meridiem}
+                      onChange={selected =>
+                        this.setState({
+                          delivery: {
+                            ...this.state.delivery,
+                            meridiem: selected,
+                          },
+                        })
+                      }
+                    />
+                  }
+                />
+              </Stack>
               <TextField
                 label="Digest count of each email"
                 type="number"
