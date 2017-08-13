@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Layout, Button, Card, FormLayout, TextField } from "@shopify/polaris";
 
 class App extends Component {
@@ -11,17 +12,16 @@ class App extends Component {
   }
 
   valueChanged() {
-    return this.props.digestCount != this.state.digestCount
-      || this.props.deliveryTime != this.state.deliveryTime;
+    return (
+      this.props.digestCount !== this.state.digestCount ||
+      this.props.deliveryTime !== this.state.deliveryTime
+    );
   }
 
   renderIndex() {
     return (
       <Layout sectioned>
-        <Layout.AnnotatedSection
-          title="Welcome"
-          description="Please authorize"
-        >
+        <Layout.AnnotatedSection title="Welcome" description="Please authorize">
           <a href="/auth/github">Github</a>
         </Layout.AnnotatedSection>
       </Layout>
@@ -64,14 +64,9 @@ class App extends Component {
                 type="number"
                 value={this.state.digestCount}
                 min="0"
-                onChange={v => this.setState({ digestCount: v })}
+                onChange={v => this.setState({ digestCount: Number(v) })}
               />
-              <Button
-                primary
-                url="#"
-                disabled={!this.valueChanged()}
-                submit
-              >
+              <Button primary url="#" disabled={!this.valueChanged()} submit>
                 Save
               </Button>
             </FormLayout>
@@ -88,5 +83,12 @@ class App extends Component {
     return this.renderIndex();
   }
 }
+
+App.propTypes = {
+  email: PropTypes.string.isRequired,
+  githubUserName: PropTypes.string.isRequired,
+  deliveryTime: PropTypes.string.isRequired,
+  digestCount: PropTypes.number.isRequired,
+};
 
 export default App;
