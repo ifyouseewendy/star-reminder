@@ -38,6 +38,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "watch": "webpack --progress --colors --watch",
     "start": "webpack-dev-server --open --hot-only"
   }
 }
