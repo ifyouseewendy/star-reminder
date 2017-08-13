@@ -2,6 +2,7 @@
 require_relative "lib/star_reminder"
 require "sinatra/base"
 require "omniauth"
+require "omniauth-github"
 require "securerandom"
 
 class MyApp < Sinatra::Base
