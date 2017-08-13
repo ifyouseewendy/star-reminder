@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "whatwg-fetch";
+import "@shopify/polaris/styles.css";
 import { AppContainer } from "react-hot-loader";
 import App from "./app";
 import "./style.css";
