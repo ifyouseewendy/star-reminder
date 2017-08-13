@@ -78,10 +78,12 @@ class App extends Component {
                 value={this.props.githubUserName}
                 disabled
               />
-              <DisplayText size="smail">Send email</DisplayText>
-              <Stack spacing="loose">
+              <Stack
+                alignment="trailing"
+                distribution="fill"
+              >
                 <Select
-                  label=""
+                  label="Send email"
                   options={["every week", "every day"]}
                   value={this.state.delivery.frequency}
                   onChange={selected =>
