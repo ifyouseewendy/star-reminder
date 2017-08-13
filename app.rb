@@ -28,8 +28,13 @@ class MyApp < Sinatra::Base
   get "/auth/:provider/callback" do
     begin
       auth = env["omniauth.auth"]
-      email, username = auth["info"].values_at("email", "username")
+      email, username = auth["info"].values_at("email", "nickname")
       access_token = auth["credentials"]["token"]
+
+      if User.find(email: email).first
+        session[:email] = email
+        redirect to("/")
+      end
 
       user = User.create(email: email)
       github_user = GithubUser.create(username: username, access_token: access_token)
