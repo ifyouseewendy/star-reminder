@@ -24,9 +24,11 @@ services:
       - DATADOG_HOST=dogstatsd:8125
     volumes:
       - .:/app
+      - bundle:/bundle
     depends_on:
       - redis_db
       - dogstatsd
 
 volumes:
   data:
+  bundle:

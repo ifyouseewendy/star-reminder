@@ -14,7 +14,11 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
+ENV BUNDLE_GEMFILE=/app/Gemfile \
+    BUNDLE_JOBS=2 \
+    BUNDLE_PATH=/bundle
+RUN bundle check || bundle install
+
 ADD . .
 
 RUN bundle exec whenever > /tmp/crontab
