@@ -30,7 +30,7 @@ class MyApp < Sinatra::Base
       email: email,
       githubUserName: user.following.first.username,
       digestCount: user.digest_count,
-      deliveryTime: Time.now.strftime("%Y-%m-%dT%H:%m")
+      deliveryAt: Time.now.strftime("%Y-%m-%dT%H:%m")
     }.to_json
   end
 

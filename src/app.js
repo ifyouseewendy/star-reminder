@@ -16,14 +16,14 @@ class App extends Component {
     super(props);
     this.state = {
       digestCount: props.digestCount,
-      deliveryTime: props.deliveryTime,
+      deliveryAt: props.deliveryAt,
     };
   }
 
   valueChanged() {
     return (
       this.props.digestCount !== this.state.digestCount ||
-      this.props.deliveryTime !== this.state.deliveryTime
+      this.props.deliveryAt !== this.state.deliveryAt
     );
   }
 
@@ -65,22 +65,21 @@ class App extends Component {
                 disabled
               />
               <TextField
-                label="Github Username"
+                label="Github username"
                 name="github-username"
                 type="text"
                 value={this.props.githubUserName}
                 disabled
               />
               <TextField
-                label="Delivery Time"
-                name="delivery-time"
+                label="Delivery at"
+                name="delivery-at"
                 type="datetime-local"
-                value={this.state.deliveryTime}
-                onChange={v => this.setState({ deliveryTime: v })}
+                value={this.state.deliveryAt}
+                onChange={v => this.setState({ deliveryAt: v })}
               />
               <TextField
-                label="Delivery Digest Count"
-                id="hello"
+                label="Digest count of each email"
                 type="number"
                 value={this.state.digestCount}
                 min="0"
@@ -107,7 +106,7 @@ class App extends Component {
 App.propTypes = {
   email: PropTypes.string.isRequired,
   githubUserName: PropTypes.string.isRequired,
-  deliveryTime: PropTypes.string.isRequired,
+  deliveryAt: PropTypes.string.isRequired,
   digestCount: PropTypes.number.isRequired,
 };
 
