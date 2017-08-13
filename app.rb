@@ -22,7 +22,16 @@ class MyApp < Sinatra::Base
   end
 
   get "/user" do
-    { email: session[:email] }.to_json
+    email = session[:email]
+    user = User.find(email: email).first
+    return {}.to_json if user.nil?
+
+    {
+      email: email,
+      githubUserName: user.following.first.username,
+      digestCount: user.digest_count,
+      deliveryTime: Time.now.strftime("%Y-%m-%dT%H:%m")
+    }.to_json
   end
 
   get "/auth/:provider/callback" do
