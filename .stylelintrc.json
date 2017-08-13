@@ -4,6 +4,10 @@
     "stylelint-order"
   ],
   "rules": {
-    "order/declaration-block-properties-alphabetical-order": true
+    "order/order": [
+      "custom-properties",
+      "declarations"
+		],
+    "order/properties-alphabetical-order": true
   }
 }
