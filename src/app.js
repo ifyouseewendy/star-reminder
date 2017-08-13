@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Layout, Button, Card, FormLayout, TextField } from "@shopify/polaris";
+import {
+  Layout,
+  Heading,
+  DisplayText,
+  CalloutCard,
+  Button,
+  Card,
+  FormLayout,
+  TextField,
+} from "@shopify/polaris";
 
 class App extends Component {
   constructor(props) {
@@ -20,21 +29,32 @@ class App extends Component {
 
   renderIndex() {
     return (
-      <Layout sectioned>
-        <Layout.AnnotatedSection title="Welcome" description="Please authorize">
-          <a href="/auth/github">Github</a>
-        </Layout.AnnotatedSection>
+      <Layout>
+        <Layout.Section>
+          <DisplayText size="Large">{"> Github Star Reminder"}</DisplayText>
+        </Layout.Section>
+        <Layout.Section>
+          <CalloutCard
+            illustration="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png"
+            primaryAction={{
+              content: "Login via Github",
+              url: "/auth/github",
+            }}
+          >
+            <p>Get a digest email of your Github stars every week.</p>
+          </CalloutCard>
+        </Layout.Section>
       </Layout>
     );
   }
 
   renderDashboard() {
     return (
-      <Layout sectioned>
-        <Layout.AnnotatedSection
-          title="Dashboard"
-          description="Update and confirm your settings"
-        >
+      <Layout>
+        <Layout.Section>
+          <DisplayText size="Large">{"> Github Star Reminder"}</DisplayText>
+        </Layout.Section>
+        <Layout.Section>
           <Card sectioned>
             <FormLayout>
               <TextField
@@ -71,7 +91,7 @@ class App extends Component {
               </Button>
             </FormLayout>
           </Card>
-        </Layout.AnnotatedSection>
+        </Layout.Section>
       </Layout>
     );
   }
