@@ -92,7 +92,7 @@ describe User do
 
     it "should randomly fetch stars for empty sent" do
       assert_empty user.sent
-      assert_equal user.digest_count.to_i, user.digest.count
+      assert_equal user.digest_count, user.digest.count
     end
 
     it "should fetch stars excluding sent" do
@@ -104,7 +104,7 @@ describe User do
     it "should refresh fetching when there are not enough stars to digest" do
       user.expects(:generate_digest).with(nil).returns([]).once
       user.expects(:generate_digest).with(refresh: true).returns([0] * 2).once
-      assert_equal user.digest_count.to_i, user.digest.count
+      assert_equal user.digest_count, user.digest.count
     end
 
     it "should return empty when there are not enough stars to digest even after refreshing" do

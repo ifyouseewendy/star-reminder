@@ -4,8 +4,8 @@ class User < Model
   unique :email
   index :email
 
-  attribute :digest_count
-  attribute :digest_hour
+  attribute :digest_count, Type::Integer
+  attribute :digest_hour, Type::Integer
   attribute :digest_frequency
   attribute :digest_meridiem
 
@@ -13,9 +13,9 @@ class User < Model
   collection :following, :GithubUser
 
   DEFAULT_SETTING = {
-    digest_count: "2",
+    digest_count: 2,
     digest_frequency: "every week",
-    digest_hour: "8",
+    digest_hour: 8,
     digest_meridiem: "am"
   }
 
@@ -55,10 +55,10 @@ class User < Model
 
   def digest
     stars = generate_digest
-    return stars if stars.count >= digest_count.to_i
+    return stars if stars.count >= digest_count
 
     stars = generate_digest(refresh: true)
-    return stars if stars.count >= digest_count.to_i
+    return stars if stars.count >= digest_count
 
     []
   end
@@ -67,7 +67,7 @@ class User < Model
     fetch_stars if refresh
 
     following.reduce([]) do |ret, source_user|
-      ret + source_user.stars.select { |st| !sent.include?(st) }.sample(digest_count.to_i)
+      ret + source_user.stars.select { |st| !sent.include?(st) }.sample(digest_count)
     end
   end
 
