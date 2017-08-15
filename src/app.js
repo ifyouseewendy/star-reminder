@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import _ from "lodash";
 import {
   Button,
   CalloutCard,
@@ -125,7 +126,7 @@ App.propTypes = {
   githubUserName: PropTypes.string.isRequired,
   digest: PropTypes.shape({
     frequency: PropTypes.oneOf(["every week", "every day"]),
-    hour: PropTypes.number.isRequired,
+    hour: PropTypes.oneOf(_.range(1, 13)),
     meridiem: PropTypes.oneOf(["am", "pm"]),
     count: PropTypes.number.isRequired,
   }).isRequired,
