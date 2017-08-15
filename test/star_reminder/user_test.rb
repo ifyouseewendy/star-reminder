@@ -82,6 +82,7 @@ describe User do
 
     before do
       user.follow(github_user)
+      user.stubs(digest_count: 2)
       3.times do |i|
         new_star = fixture.merge(name: "fixture[:name]#{i}")
         GithubStar.find_or_create_by(new_star, github_user)

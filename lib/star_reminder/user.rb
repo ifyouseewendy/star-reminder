@@ -13,7 +13,7 @@ class User < Model
   collection :following, :GithubUser
 
   DEFAULT_SETTING = {
-    digest_count: 2,
+    digest_count: 5,
     digest_frequency: "every week",
     digest_hour: 8,
     digest_meridiem: "am"
