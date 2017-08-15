@@ -29,8 +29,12 @@ class MyApp < Sinatra::Base
     {
       email: email,
       githubUserName: user.following.first.username,
-      digestCount: user.digest_count,
-      deliveryAt: Time.now.strftime("%Y-%m-%dT%H:%m")
+      digest: {
+        frequency: "every week",
+        hour: 8,
+        meridiem: "am",
+        count: user.digest_count
+      }
     }.to_json
   end
 

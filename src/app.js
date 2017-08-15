@@ -15,22 +15,11 @@ import {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      digestCount: props.digestCount,
-      deliveryAt: props.deliveryAt,
-      delivery: {
-        frequency: "every week",
-        hour: "8",
-        meridiem: "am",
-      },
-    };
+    this.state = props.digest;
   }
 
-  valueChanged() {
-    return (
-      this.props.digestCount !== this.state.digestCount ||
-      this.props.deliveryAt !== this.state.deliveryAt
-    );
+  formChanged() {
+    return this.props.digest !== this.state;
   }
 
   renderIndex() {
@@ -88,53 +77,32 @@ class App extends Component {
                   type="number"
                   min="1"
                   max="12"
-                  value={this.state.delivery.hour}
-                  onChange={v =>
-                    this.setState({
-                      delivery: {
-                        ...this.state.delivery,
-                        hour: v,
-                      },
-                    })
-                  }
+                  value={this.state.hour}
+                  onChange={v => this.setState({ hour: Number(v) })}
                   connectedRight={
                     <Select
                       label="meridiem"
                       labelHidden
                       options={["am", "pm"]}
-                      value={this.state.delivery.meridiem}
-                      onChange={selected =>
-                        this.setState({
-                          delivery: {
-                            ...this.state.delivery,
-                            meridiem: selected,
-                          },
-                        })
-                      }
+                      value={this.state.meridiem}
+                      onChange={meridiem => this.setState({ meridiem })}
                     />
                   }
                 />
                 <Select
                   options={["every week", "every day"]}
-                  value={this.state.delivery.frequency}
-                  onChange={selected =>
-                    this.setState({
-                      delivery: {
-                        ...this.state.delivery,
-                        frequency: selected,
-                      },
-                    })
-                  }
+                  value={this.state.frequency}
+                  onChange={frequency => this.setState({ frequency })}
                 />
               </Stack>
               <TextField
                 label="Digest count of each email"
                 type="number"
-                value={this.state.digestCount}
+                value={this.state.count}
                 min="0"
-                onChange={v => this.setState({ digestCount: Number(v) })}
+                onChange={count => this.setState({ count: Number(count) })}
               />
-              <Button primary url="#" disabled={!this.valueChanged()} submit>
+              <Button primary url="#" disabled={!this.formChanged()} submit>
                 Save
               </Button>
             </FormLayout>
@@ -155,8 +123,12 @@ class App extends Component {
 App.propTypes = {
   email: PropTypes.string.isRequired,
   githubUserName: PropTypes.string.isRequired,
-  deliveryAt: PropTypes.string.isRequired,
-  digestCount: PropTypes.number.isRequired,
+  digest: PropTypes.shape({
+    frequency: PropTypes.oneOf(["every week", "every day"]),
+    hour: PropTypes.number.isRequired,
+    meridiem: PropTypes.oneOf(["am", "pm"]),
+    count: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default App;
