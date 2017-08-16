@@ -30,10 +30,10 @@ class MyApp < Sinatra::Base
       email: email,
       githubUserName: user.following.first.username,
       digest: {
-        frequency: "every week",
-        hour: 8,
-        meridiem: "am",
-        count: user.digest_count
+        count: user.digest_count,
+        frequency: user.digest_frequency,
+        hour: user.digest_hour,
+        meridiem: user.digest_meridiem
       }
     }.to_json
   end
