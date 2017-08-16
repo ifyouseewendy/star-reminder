@@ -10,6 +10,13 @@ class MyApp < Sinatra::Base
   use OmniAuth::Builder do
     provider :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"]
   end
+  use Rack::Parser,
+    parsers: {
+      "application/json" => proc { |data| JSON.parse(data).symbolize_keys }
+    },
+    handlers: {
+      "application/json" => proc { |_e, type| [400, { "Content-Type" => type }, ["broke"]] }
+    }
 
   enable :sessions
   set :session_secret, ENV.fetch("SESSION_SECRET") { SecureRandom.hex(64) }

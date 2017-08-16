@@ -11,6 +11,7 @@ gem "ohm-contrib"
 gem "whenever", require: false
 gem "dogstatsd-ruby", require: "datadog/statsd"
 gem "sinatra"
+gem "rack-parser", require: "rack/parser"
 gem "omniauth"
 gem "omniauth-github"
 
