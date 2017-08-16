@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import "whatwg-fetch";
 import _ from "lodash";
 import {
   Button,
@@ -13,6 +14,16 @@ import {
   TextField,
 } from "@shopify/polaris";
 
+const checkStatus = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+
+  const error = new Error(response.statusText);
+  error.response = response;
+  throw error;
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +32,27 @@ class App extends Component {
 
   formChanged() {
     return this.props.digest !== this.state;
+  }
+
+  updateDigest = () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+      body: JSON.stringify(this.state),
+    };
+
+    fetch("/user/digest", options)
+      .then(checkStatus)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((data) => {
+        console.log(data);
+      });
   }
 
   renderIndex() {
@@ -103,7 +135,7 @@ class App extends Component {
                 min="0"
                 onChange={count => this.setState({ count: Number(count) })}
               />
-              <Button primary url="#" disabled={!this.formChanged()} submit>
+              <Button primary disabled={!this.formChanged()} onClick={this.updateDigest}>
                 Save
               </Button>
             </FormLayout>
