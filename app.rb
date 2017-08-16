@@ -45,6 +45,30 @@ class MyApp < Sinatra::Base
     }.to_json
   end
 
+  post "/user/digest" do
+    email = session[:email]
+    user = User.find(email: email).first
+    halt 401 if user.nil?
+
+    begin
+      user.update(
+        digest_count: params[:count],
+        digest_frequency: params[:frequency],
+        digest_hour: params[:hour],
+        digest_meridiem: params[:meridiem]
+      )
+      { status: :succeed, msg: "Successfully update user digest" }
+        .tap { |h| logger.info h.merge(params: params) }
+        .to_json
+    rescue => e
+      {
+        status: :failed,
+        msg: "Failed update user digest",
+        error: { message: e.message, backtrace: e.backtrace }
+      }.tap { |h| logger.error h.merge(params: params) }.to_json
+    end
+  end
+
   get "/auth/:provider/callback" do
     begin
       auth = env["omniauth.auth"]
