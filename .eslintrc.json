@@ -5,6 +5,7 @@
     "jest": true
   },
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
@@ -26,7 +27,8 @@
       "exports": "always-multiline",
       "functions": "ignore"
     }],
-    "no-plusplus": ["off"]
+    "no-plusplus": ["off"],
+    "strict": 0
   },
   "plugins": [
     "react"
