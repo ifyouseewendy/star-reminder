@@ -1,4 +1,12 @@
+$primary-color: #e76278;
+$light-color: #f0f3ed;
+$dark-color: #3c3047;
+$accent-color: #84685e;
+$accent-color-2: #c83654;
+
 body {
+  background-color: $primary-color;
+  color: #fff;
   display: grid;
   font-family: "Roboto", sans-serif;
   grid-template-columns: 20% 60% 20%;
