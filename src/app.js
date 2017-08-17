@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "whatwg-fetch";
 import _ from "lodash";
 import {
+  Banner,
   Button,
   CalloutCard,
   Card,
@@ -27,11 +28,17 @@ const checkStatus = (response) => {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = props.digest;
+    this.state = {
+      ...props.digest,
+      banner: "hide",
+    };
   }
 
-  formChanged() {
-    return this.props.digest !== this.state;
+  formNotChanged() {
+    return _.isEqual(
+      this.props.digest,
+      _.omit(this.state, ["banner"]),
+    );
   }
 
   updateDigest = () => {
@@ -48,11 +55,32 @@ class App extends Component {
       .then(checkStatus)
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
+        this.setState({
+          banner: data.status === "succeed" ? "success" : "critical",
+        });
       })
       .catch((data) => {
-        console.log(data);
+        this.setState({
+          banner: data.status === "succeed" ? "success" : "critical",
+        });
       });
+  }
+
+  showBanner() {
+    if (this.state.banner === "hide") return null;
+
+    return (
+      <Banner
+        onDismiss={() => this.setState({ banner: "hide" })}
+        status={this.state.banner}
+      >
+        {
+          this.state.banner === "success"
+            ? "Successfully update settings"
+            : "Something went wrong. Please contact ifyouseewendy@gmail.com"
+        }
+      </Banner>
+    );
   }
 
   renderIndex() {
@@ -82,6 +110,9 @@ class App extends Component {
       <Layout>
         <Layout.Section>
           <DisplayText size="Large">{"> Github Star Reminder"}</DisplayText>
+        </Layout.Section>
+        <Layout.Section>
+          {this.showBanner()}
         </Layout.Section>
         <Layout.Section>
           <Card sectioned>
@@ -135,7 +166,7 @@ class App extends Component {
                 min="0"
                 onChange={count => this.setState({ count: Number(count) })}
               />
-              <Button primary disabled={!this.formChanged()} onClick={this.updateDigest}>
+              <Button primary disabled={this.formNotChanged()} onClick={this.updateDigest}>
                 Save
               </Button>
             </FormLayout>
