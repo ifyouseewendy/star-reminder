@@ -3,9 +3,10 @@ body {
   font-family: "Roboto", sans-serif;
   grid-template-columns: 20% 60% 20%;
   grid-template-rows: 20% 60% 20%;
+
+  #root {
+    grid-column-start: 2;
+    grid-row-start: 2;
+  }
 }
 
-#root {
-  grid-column-start: 2;
-  grid-row-start: 2;
-}
