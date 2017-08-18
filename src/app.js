@@ -14,7 +14,7 @@ import {
   Stack,
   TextField,
 } from "@shopify/polaris";
-import Logo from "./logo.png";
+import Logo from "./logo";
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
@@ -110,16 +110,9 @@ class App extends Component {
     return (
       <Layout>
         <Layout.Section>
-          <DisplayText size="Large">
-            <span className="header--title">
-              <img src={Logo} alt="logo" />
-              {"> Github Star Reminder"}
-            </span>
-          </DisplayText>
+          <Logo />
         </Layout.Section>
-        <Layout.Section>
-          {this.showBanner()}
-        </Layout.Section>
+        {this.showBanner()}
         <Layout.Section>
           <Card sectioned>
             <FormLayout>

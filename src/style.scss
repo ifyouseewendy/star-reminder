@@ -18,3 +18,21 @@ body {
   }
 }
 
+.logo {
+  align-items: center;
+  display: inline-flex;
+  height: 10rem;
+
+  img {
+    height: 7rem;
+    margin-right: 1rem;
+  }
+
+  p {
+    color: black;
+    font-size: 3.3rem;
+    font-weight: bold;
+    line-height: 1;
+    width: 2rem;
+  }
+}
