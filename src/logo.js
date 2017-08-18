@@ -3,8 +3,10 @@ import Image from "./logo.png";
 
 const Logo = () => (
   <div className="logo">
-    <img src={Image} alt="logo" />
-    <p>Star Reminder</p>
+    <div className="logo--container">
+      <img src={Image} alt="logo" />
+      <p>Star Reminder</p>
+    </div>
   </div>
 );
 

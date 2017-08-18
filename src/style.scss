@@ -10,7 +10,7 @@ $body-font: 'Open Sans', sans-serif;
 
 body {
   background-color: $primary-color;
-  color: #fff;
+  color: white;
   display: grid;
   font-family: $body-font;
   grid-template-columns: 20% 60% 20%;
@@ -23,6 +23,12 @@ body {
 }
 
 .logo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo--container {
   align-items: center;
   display: inline-flex;
   height: 10rem;
@@ -33,11 +39,11 @@ body {
   }
 
   p {
-    color: black;
+    color: white;
     font-family: $title-font;
     font-size: 3.3rem;
     font-weight: bold;
     line-height: 1;
-    width: 2rem;
+    width: 16rem;
   }
 }
