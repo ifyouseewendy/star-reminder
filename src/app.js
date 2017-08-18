@@ -88,17 +88,17 @@ class App extends Component {
     return (
       <Layout>
         <Layout.Section>
-          <DisplayText size="Large" className="header--title">{"> Github Star Reminder"}</DisplayText>
+          <Logo />
         </Layout.Section>
         <Layout.Section>
           <CalloutCard
+            title={<p className="description">Get a digest email of your Github stars every week.</p>}
             illustration="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png"
             primaryAction={{
               content: "Login via Github",
               url: "/auth/github",
             }}
           >
-            <p>Get a digest email of your Github stars every week.</p>
           </CalloutCard>
         </Layout.Section>
       </Layout>
