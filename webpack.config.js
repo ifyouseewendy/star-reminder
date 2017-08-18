@@ -3,9 +3,10 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const environment = process.env.NODE_ENV || "development";
 const extractSass = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development",
+  disable: environment === "development",
 });
 
 module.exports = {
