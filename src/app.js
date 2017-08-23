@@ -7,7 +7,6 @@ import {
   Button,
   CalloutCard,
   Card,
-  DisplayText,
   FormLayout,
   Layout,
   Select,
@@ -91,15 +90,16 @@ class App extends Component {
           <Logo />
         </Layout.Section>
         <Layout.Section>
-          <CalloutCard
-            title={<p className="description">Get a digest email of your Github stars every week.</p>}
-            illustration="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png"
-            primaryAction={{
-              content: "Login via Github",
-              url: "/auth/github",
-            }}
-          >
-          </CalloutCard>
+          <div className="main">
+            <CalloutCard
+              title={<p className="description">Get a digest email of your Github stars every week.</p>}
+              illustration="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png"
+              primaryAction={{
+                content: "Login via Github",
+                url: "/auth/github",
+              }}
+            />
+          </div>
         </Layout.Section>
       </Layout>
     );
@@ -114,62 +114,64 @@ class App extends Component {
         </Layout.Section>
         {this.showBanner()}
         <Layout.Section>
-          <Card sectioned>
-            <FormLayout>
-              <TextField
-                label="Email"
-                name="email"
-                type="email"
-                value={this.props.email}
-                disabled
-              />
-              <TextField
-                label="Github username"
-                name="github-username"
-                type="text"
-                value={this.props.githubUserName}
-                disabled
-              />
-              <Stack
-                alignment="trailing"
-                distribution="fill"
-              >
+          <div className="main">
+            <Card sectioned>
+              <FormLayout>
                 <TextField
-                  label="Send email"
-                  prefix="at"
+                  label="Email"
+                  name="email"
+                  type="email"
+                  value={this.props.email}
+                  disabled
+                />
+                <TextField
+                  label="Github username"
+                  name="github-username"
+                  type="text"
+                  value={this.props.githubUserName}
+                  disabled
+                />
+                <Stack
+                  alignment="trailing"
+                  distribution="fill"
+                >
+                  <TextField
+                    label="Send email"
+                    prefix="at"
+                    type="number"
+                    min="1"
+                    max="12"
+                    value={this.state.hour}
+                    onChange={v => this.setState({ hour: Number(v) })}
+                    connectedRight={
+                      <Select
+                        label="meridiem"
+                        labelHidden
+                        options={["am", "pm"]}
+                        value={this.state.meridiem}
+                        onChange={meridiem => this.setState({ meridiem })}
+                      />
+                    }
+                  />
+                  <Select
+                    options={["every week", "every day"]}
+                    value={this.state.frequency}
+                    onChange={frequency => this.setState({ frequency })}
+                  />
+                </Stack>
+                <TextField
+                  label="Digest count of each email"
                   type="number"
-                  min="1"
-                  max="12"
-                  value={this.state.hour}
-                  onChange={v => this.setState({ hour: Number(v) })}
-                  connectedRight={
-                    <Select
-                      label="meridiem"
-                      labelHidden
-                      options={["am", "pm"]}
-                      value={this.state.meridiem}
-                      onChange={meridiem => this.setState({ meridiem })}
-                    />
-                  }
+                  value={this.state.count}
+                  min="0"
+                  onChange={count => this.setState({ count: Number(count) })}
                 />
-                <Select
-                  options={["every week", "every day"]}
-                  value={this.state.frequency}
-                  onChange={frequency => this.setState({ frequency })}
-                />
-              </Stack>
-              <TextField
-                label="Digest count of each email"
-                type="number"
-                value={this.state.count}
-                min="0"
-                onChange={count => this.setState({ count: Number(count) })}
-              />
-              <Button primary disabled={this.formNotChanged()} onClick={this.updateDigest}>
-                Save
-              </Button>
-            </FormLayout>
-          </Card>
+                <Button primary disabled={this.formNotChanged()} onClick={this.updateDigest}>
+                  Save
+                </Button>
+              </FormLayout>
+            </Card>
+          </div>
         </Layout.Section>
       </Layout>
     );
