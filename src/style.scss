@@ -1,16 +1,14 @@
-$primary-color: #e76278;
-$light-color: #f0f3ed;
-$dark-color: #3c3047;
-$accent-color: #84685e;
-$accent-color-2: #c83654;
-
 $title-font: 'Proza Libre', sans-serif;
 $accent-font: 'Lora', serif;
 $body-font: 'Open Sans', sans-serif;
 
+$light-color: #f4f6f8;
+$indigo-dark: #202e78;
+$indigo-text: #3e4155;
+
 body {
-  background-color: $primary-color;
-  color: $dark-color;
+  background-color: $light-color;
+  color: $indigo-text;
   display: grid;
   font-family: $body-font;
   grid-template-columns: 20% 60% 20%;
@@ -35,24 +33,25 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-}
 
-.logo--container {
-  align-items: center;
-  display: inline-flex;
-  height: 10rem;
+  .logo--container {
+    align-items: center;
+    display: inline-flex;
+    height: 10rem;
 
-  img {
-    height: 7rem;
-    margin-right: 1rem;
-  }
+    img {
+      background-color: $indigo-dark;
+      height: 7rem;
+      margin-right: 1rem;
+    }
 
-  p {
-    color: white;
-    font-family: $title-font;
-    font-size: 3.3rem;
-    font-weight: bold;
-    line-height: 1;
-    width: 16rem;
+    p {
+      color: $indigo-dark;
+      font-family: $title-font;
+      font-size: 3.3rem;
+      font-weight: bold;
+      line-height: 1;
+      width: 16rem;
+    }
   }
 }
