@@ -126,6 +126,7 @@ GEM
       byebug (~> 9.0)
       pry (~> 0.10)
     public_suffix (2.0.5)
+    puma (3.10.0)
     rack (2.0.3)
     rack-parser (0.7.0)
       rack
@@ -216,6 +217,7 @@ DEPENDENCIES
   omniauth
   omniauth-github
   pry-byebug
+  puma
   rack-parser
   roadie-rails
   shotgun

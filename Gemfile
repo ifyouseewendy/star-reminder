@@ -14,12 +14,13 @@ gem "sinatra"
 gem "rack-parser", require: "rack/parser"
 gem "omniauth"
 gem "omniauth-github"
+gem "puma"
+gem "foreman"
 
 group :development do
   gem "letter_opener"
   gem "pry-byebug"
   gem "awesome_print"
-  gem "foreman"
   gem "shotgun"
 end
 

@@ -24,6 +24,8 @@ class MyApp < Sinatra::Base
   set :public_folder, File.dirname(__FILE__) + "/dist"
   set :views, File.dirname(__FILE__) + "/src"
 
+  set :server, :puma
+
   get "/" do
     File.read("src/index.html")
   end
