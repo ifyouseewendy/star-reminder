@@ -22,4 +22,5 @@ RUN bundle check || bundle install
 ADD . .
 
 RUN bundle exec whenever > /tmp/crontab
-CMD supercronic /tmp/crontab
+RUN touch /tmp/empty.env
+CMD bundle exec foreman start --env /tmp/empty.env

@@ -18,6 +18,8 @@ services:
   script:
     image: ifyouseewendy/star-reminder:latest
     build: .
+    ports:
+      - "9393:9393"
     environment:
       - RACK_ENV=production
       - REDIS_HOST=redis://redis_db:6379

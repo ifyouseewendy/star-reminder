@@ -1,1 +1,2 @@
-redis: redis-server /usr/local/etc/redis.conf
+server: bundle exec rackup --port=9393
+cron: supercronic /tmp/crontab
