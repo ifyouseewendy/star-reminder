@@ -21,6 +21,10 @@ RUN bundle check || bundle install
 
 ADD . .
 
+ENV SHARED_PATH=/data
+RUN cp config/nginx.conf ${SHARED_PATH}/nginx.conf
+RUN cp -r dist ${SHARED_PATH}/dist
+
 RUN bundle exec whenever > /tmp/crontab
 RUN touch /tmp/empty.env
 CMD bundle exec foreman start --env /tmp/empty.env
