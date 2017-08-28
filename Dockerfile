@@ -17,7 +17,7 @@ COPY Gemfile Gemfile.lock ./
 ENV BUNDLE_GEMFILE=/app/Gemfile \
     BUNDLE_JOBS=2 \
     BUNDLE_PATH=/bundle
-RUN bundle check || bundle install
+RUN RUN bundle install --without development test
 
 ADD . .
 
