@@ -2,12 +2,15 @@ version: '3'
 services:
   web:
     image: nginx
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - .:/app
     ports:
       - "80:80"
     environment:
       - SERVER_PORT=9393
       - SERVER_NAME=starreminder.com
-    command: /bin/bash -c "envsubst '$$SERVER_PORT $$SERVER_NAME' < /data/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    command: /bin/bash -c "envsubst '$$SERVER_PORT $$SERVER_NAME' < /etc/nginx/conf.d/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
     depends_on:
       - script
   redis_db:
@@ -37,7 +40,6 @@ services:
     volumes:
       - .:/app
       - bundle:/bundle
-      - data:/data
     depends_on:
       - redis_db
       - dogstatsd
