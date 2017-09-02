@@ -1,17 +1,11 @@
 version: '3'
 services:
-  web:
-    image: nginx
+  nginx:
+    image: jwilder/nginx-proxy:alpine
     volumes:
-      - .:/app
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - "80:80"
-    environment:
-      - SERVER_PORT=9393
-      - SERVER_NAME=starreminder.com
-    command: /bin/bash -c "envsubst '$$SERVER_PORT $$SERVER_NAME' < /app/config/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-    depends_on:
-      - script
   redis_db:
     image: redis:4.0
     volumes:
