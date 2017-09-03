@@ -23,16 +23,12 @@ services:
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
   app:
     image: ifyouseewendy/star-reminder:latest
-    build: .
     ports:
       - "9393:9393"
     environment:
       - RACK_ENV=production
       - REDIS_HOST=redis://redis_db:6379
       - DATADOG_HOST=dogstatsd:8125
-    volumes:
-      - .:/app
-      - bundle:/bundle
     depends_on:
       - redis_db
       - dogstatsd
