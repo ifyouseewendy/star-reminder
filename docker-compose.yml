@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 services:
   nginx:
     image: jwilder/nginx-proxy:alpine
@@ -29,10 +29,17 @@ services:
       - RACK_ENV=production
       - REDIS_HOST=redis://redis_db:6379
       - DATADOG_HOST=dogstatsd:8125
+      - ENV_PRODUCTION=/run/secrets/env_production
     depends_on:
       - redis_db
       - dogstatsd
+    secrets:
+      - env_production
 
 volumes:
   data:
   bundle:
+
+secrets:
+   env_production:
+     file: /opt/.env.production

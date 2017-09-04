@@ -2,11 +2,12 @@
 
 require "rubygems"
 
-require "dotenv"
-Dotenv.load
-
 ENV["RACK_ENV"] = "development" if ENV["RACK_ENV"].nil? || ENV["RACK_ENV"].empty?
 Bundler.require(:default, ENV["RACK_ENV"])
+
+require "dotenv"
+Dotenv.load
+Dotenv.load(ENV["ENV_PRODUCTION"]) if ENV["RACK_ENV"].downcase.to_sym == :production
 
 module StarReminder
   class << self
