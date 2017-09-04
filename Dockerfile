@@ -27,5 +27,7 @@ RUN bundle exec whenever > /tmp/crontab
 
 RUN yarn run webpack
 
+RUN mkdir -p log
+
 RUN touch /tmp/empty.env
 CMD bundle exec foreman start --env /tmp/empty.env
