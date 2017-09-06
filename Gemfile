@@ -30,5 +30,4 @@ group :test do
 end
 
 group :production do
-  gem "logglier", "~> 0.2.11"
 end

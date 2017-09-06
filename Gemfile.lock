@@ -66,8 +66,6 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
-    logglier (0.2.13)
-      multi_json (~> 1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
@@ -207,7 +205,6 @@ DEPENDENCIES
   dotenv
   foreman
   letter_opener
-  logglier (~> 0.2.11)
   minitest
   mocha
   octicons_helper
