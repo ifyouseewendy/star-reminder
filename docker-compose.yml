@@ -8,12 +8,16 @@ services:
       - "80:80"
     logging:
       driver: syslog
+      options:
+        tag: "{{.Name}}/{{.ID}}"
   redis_db:
     image: redis:4.0
     volumes:
       - data:/data
     logging:
       driver: syslog
+      options:
+        tag: "{{.Name}}/{{.ID}}"
   dogstatsd:
     image: datadog/docker-dd-agent:latest
     ports:
@@ -27,6 +31,8 @@ services:
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
     logging:
       driver: syslog
+      options:
+        tag: "{{.Name}}/{{.ID}}"
   app:
     image: ifyouseewendy/star-reminder:latest
     ports:
@@ -43,6 +49,8 @@ services:
       - env_production
     logging:
       driver: syslog
+      options:
+        tag: "{{.Name}}/{{.ID}}"
 
 volumes:
   data:
