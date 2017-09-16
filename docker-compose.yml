@@ -10,17 +10,6 @@ services:
     image: redis:4.0
     volumes:
       - data:/data
-  dogstatsd:
-    image: datadog/docker-dd-agent:latest
-    ports:
-      - "8125:8125/udp"
-    environment:
-      - SD_BACKEND=docker
-      - API_KEY=${DATADOG_API_KEY}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
   app:
     image: ifyouseewendy/star-reminder:latest
     ports:
@@ -28,11 +17,9 @@ services:
     environment:
       - RACK_ENV=production
       - REDIS_HOST=redis://redis_db:6379
-      - DATADOG_HOST=dogstatsd:8125
       - ENV_PRODUCTION=/run/secrets/env_production
     depends_on:
       - redis_db
-      - dogstatsd
     secrets:
       - env_production
   splunk:
