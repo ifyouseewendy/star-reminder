@@ -6,10 +6,24 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - "80:80"
+    logging:
+      driver: splunk
+      options:
+        splunk-token: BC18A09D-DFC8-4E97-A7A4-27001DA1B9F4
+        splunk-url: "https://localhost:8088"
+        splunk-insecureskipverify: "true"
+        tag: "{{.Name}}/{{.FullID}}"
   redis_db:
     image: redis:4.0
     volumes:
       - data:/data
+    logging:
+      driver: splunk
+      options:
+        splunk-token: BC18A09D-DFC8-4E97-A7A4-27001DA1B9F4
+        splunk-url: "https://localhost:8088"
+        splunk-insecureskipverify: "true"
+        tag: "{{.Name}}/{{.FullID}}"
   app:
     image: ifyouseewendy/star-reminder:latest
     ports:
@@ -18,37 +32,18 @@ services:
       - RACK_ENV=production
       - REDIS_HOST=redis://redis_db:6379
       - ENV_PRODUCTION=/run/secrets/env_production
-    depends_on:
-      - redis_db
     secrets:
       - env_production
-  splunk:
-    hostname: splunk
-    image: splunk/splunk:6.5.3-monitor
-    environment:
-      - SPLUNK_START_ARGS=--accept-license --answer-yes --no-prompt
-      - SPLUNK_ENABLE_LISTEN=9997
-      - SPLUNK_ADD=tcp 1514
-      - SPLUNK_USER=root
-      - VIRTUAL_HOST=log.starreminder.com
-      - VIRTUAL_PORT=8000
-    expose:
-      - "8000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - opt-splunk-etc:/opt/splunk/etc
-      - opt-splunk-var:/opt/splunk/var
-    ports:
-      - "8000:8000"
-      - "9997:9997"
-      - "8088:8088"
-      - "1514:1514"
+    logging:
+      driver: splunk
+      options:
+        splunk-token: BC18A09D-DFC8-4E97-A7A4-27001DA1B9F4
+        splunk-url: "https://localhost:8088"
+        splunk-insecureskipverify: "true"
+        tag: "{{.Name}}/{{.FullID}}"
 
 volumes:
   data:
-  bundle:
-  opt-splunk-etc:
-  opt-splunk-var:
 
 secrets:
    env_production:
